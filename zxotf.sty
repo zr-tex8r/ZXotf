@@ -152,7 +152,6 @@
 \begingroup \count@ \bxUcv \divide \count@ \bx@m@cc \chardef \bx@m@hb
 \count@ \multiply \count@ \bx@m@cc \advance \bxUcv -\count@ \setbox \z@
 \hbox {#1\bx@m@hb \char \bxUcv }%
-\message{\the\bx@m@hb/\the\bxUcv}\showbox\z@
 \global \bxUcv \wd \z@ \endgroup}
 \def\zxot@emu@out{\tracingonline=2 %
   \ifcsname zxot@CD/\the\zxot@cc\endcsname
