@@ -39,9 +39,23 @@
 
 %%%% something expl3
 %% \zxot@set@basfam
-\@ifpackagelater{fontspec}{2010/05/27}% v2.0b1
-  {\@tempswatrue}{\@tempswafalse}
-\if@tempswa % fontspec v2+
+\@ifpackagelater{fontspec}{2017/11/05}{%v2.6f
+  \@tempcnta=\z@
+}{\@ifpackagelater{fontspec}{2010/05/27}{% v2.0b1
+  \@tempcnta=\@ne
+}{\@tempcnta=\tw@}}
+\ifcase\@tempcnta % fontspec v2.6f+
+\ExplSyntaxOn
+  \cs_new:Npn \zxot@set@basfam
+    { \cs_if_exist:cTF { g__fontspec_fontinfo_ \CJK@family _prop }
+        { \prop_get:cnNF { g__fontspec_fontinfo_ \CJK@family _prop } { fontname }
+            \zxot@basfam
+            { \cs_set_eq:NN \zxot@basfam \relax }
+        }
+        { \cs_set_eq:NN \zxot@basfam \relax }
+    }
+\ExplSyntaxOff
+\or         % fontspec v2+
 \ExplSyntaxOn
   \cs_new:Npn \zxot@set@basfam
     { \cs_if_exist:cTF { g__fontspec_ \CJK@family _prop }
